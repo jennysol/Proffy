@@ -2,32 +2,57 @@ import React from 'react';
 
 import whatsappIcon from '../../../assets/images/icons/whatsapp.svg';
 
+import api from '../../../services/api';
+
 import './styles.css';
-function TeacherItem() {
+
+
+ export interface Teacher {
+    avatar: string;
+    bio: string;
+    cost: number;
+    id: number;
+    name: string;
+    subject: string;
+    whatsapp: string;
+}
+
+interface TeacherItemProps {
+    teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher}) => {
+    function createNewConnection(){
+        api.post('connections', {
+            user_id: teacher.id,
+        })
+    }
+
     return (
             <article className="teacher-item">
             <header>
-                <img src="https://avatars0.githubusercontent.com/u/62623621?s=460&u=822bcb321540fc383462a036105119640c2d903e&v=4" alt="Jennifer Soliver"/>
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>Jennifer Soliver</strong>
-                    <span>React</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
 
-            <p>
-            Formou-se em letras e pedagogia, com especialização em língua portuguesa <br /><br />
-            pela Universidade Estadual de Campinas
-            </p>
+            <p>{teacher.bio}</p>
             
             <footer>
                 <p>
                     Preço.hora
-                    <strong>R$ 80,00</strong>
+                    <strong>R$ {teacher.cost}</strong>
                 </p>
-                <button type="button">
-                    <img src={whatsappIcon} alt="Whatsapp"/>
+                <a 
+                target="_blank"
+                onClick={createNewConnection}
+                href={`http://wa.me/${teacher.whatsapp}`}
+                >
+                    <img src={whatsappIcon} alt="Whatsapp" />
                     Entrar em contato
-                </button>
+                    </a>
             </footer>
         </article>
     );
