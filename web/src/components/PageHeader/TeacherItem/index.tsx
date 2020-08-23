@@ -6,7 +6,6 @@ import api from '../../../services/api';
 
 import './styles.css';
 
-
  export interface Teacher {
     avatar: string;
     bio: string;
