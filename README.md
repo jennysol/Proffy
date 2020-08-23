@@ -1,5 +1,5 @@
 # Proffy
-Aplicação react de ensino
+### Aplicação Full Strack
 https://proffy-tau-one.vercel.app/
 
 Aplicação desenvolvida na NLW 2020.
